@@ -1,4 +1,8 @@
-module Escrow {
+// Defining a Module
+module escrow__addr :: escrow {
+
+    use aptos_framework::account;
+    use std::signer;
 
     // Declaring the state variables
     address payable buyer;
@@ -9,10 +13,10 @@ module Escrow {
     // Defining a Type
     type State = u64;
 
-    // Following are the data members of the State
-    const AWAIT_PAYMENT: State = 1;
-    const AWAIT_DELIVERY: State = 2;
-    const COMPLETE: State = 3;
+    // Defining function modifier 'instate'
+    public fun instate(expected_state: State) {
+        require(state == expected_state);
+    }
 
     // Defining function modifier 'onlyBuyer'
     public fun onlyBuyer() {
