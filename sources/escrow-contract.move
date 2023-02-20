@@ -54,7 +54,7 @@ module escrow__addr :: escrow {
     public fun confirm_delivery(e: &mut Escrow) {
         instate(AWAIT_DELIVERY, e);
         onlySeller(e);
-        e.seller.transfer(move(address(this).balance));
+        e.seller = transfer move address (this.balance);
         e.state = COMPLETE;
     }
 
