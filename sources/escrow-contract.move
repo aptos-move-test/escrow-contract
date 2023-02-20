@@ -5,7 +5,7 @@ module escrow__addr :: escrow {
     use std::signer;
     use aptos_framework::event;
     use std::string::String;
-    
+
     // Following are the data members of the State
     const AWAIT_PAYMENT: State = 1;
     const AWAIT_DELIVERY: State = 2;
@@ -13,10 +13,10 @@ module escrow__addr :: escrow {
 
     // Declaring the state variables
     struct Escrow {
-        buyer: address;
-        seller: address;
-        arbiter: address;
-        state: State;
+        address: buyer ,
+        address : seller,
+        address:  arbiter,
+        state: State,
     }
 
     // Defining function modifier 'instate'
@@ -36,12 +36,12 @@ module escrow__addr :: escrow {
 
     // Defining a constructor
     public fun new_escrow(buyer: address, seller: address, arbiter: address) {
-        let e: &mut Escrow;
-        e.buyer = move(buyer);
-        e.seller = move(seller);
-        e.arbiter = move(arbiter);
-        e.state = AWAIT_PAYMENT;
-    }
+    let e: &mut Escrow;
+    e.buyer = move buyer;
+    e.seller = move seller;
+    e.arbiter = move arbiter;
+    e.state = AWAIT_PAYMENT;
+}
 
     // Defining function to confirm payment
     public fun confirm_payment(e: &mut Escrow) {
