@@ -1,6 +1,11 @@
 // Defining a Module
 module escrow__addr :: escrow {
 
+    use aptos_framework::account;
+    use std::signer;
+    use aptos_framework::event;
+    use std::string::String;
+    
     // Following are the data members of the State
     const AWAIT_PAYMENT: State = 1;
     const AWAIT_DELIVERY: State = 2;
