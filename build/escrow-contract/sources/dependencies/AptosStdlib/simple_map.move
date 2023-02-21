@@ -149,19 +149,6 @@ module aptos_std::simple_map {
         SimpleMap {data}
     }
 
-    /// Map the function over the key-value pairs of the map without modifying it.
-    public inline fun map_ref<Key: copy, Value1, Value2>(
-        map: &SimpleMap<Key, Value1>,
-        f: |&Value1|Value2
-    ): SimpleMap<Key, Value2> {
-        let data = vector::empty();
-        for_each_ref(map, |key, value| {
-            let key = *key;
-            vector::push_back(&mut data, Element {key, value: f(value)});
-        });
-        SimpleMap {data}
-    }
-
     /// Filter entries in the map.
     public inline fun filter<Key:drop, Value:drop>(
         map: SimpleMap<Key, Value>,
@@ -291,8 +278,8 @@ module aptos_std::simple_map {
     fun test_for_each_mut() {
         let m = make(1, 4, 2, 5);
         for_each_mut(&mut m, |_key, val| {
-            let val : &mut u64 = val;
-            *val = *val + 1
+            let v : &mut u64 = val;
+            *v = *v + 1
         });
         assert!(*borrow(&m, &1) == 5, 1)
     }
@@ -310,13 +297,6 @@ module aptos_std::simple_map {
     fun test_map() {
         let m = make(1, 4, 2, 5);
         let r = map(m, |val| val + 1);
-        assert!(*borrow(&r, &1) == 5, 1)
-    }
-
-    #[test]
-    fun test_map_ref() {
-        let m = make(1, 4, 2, 5);
-        let r = map_ref(&m, |val| *val + 1);
         assert!(*borrow(&r, &1) == 5, 1)
     }
 
