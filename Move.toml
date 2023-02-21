@@ -2,10 +2,10 @@
 name = 'escrow-contract'
 version = '1.0.0'
 
-[dependencies.AptosFramework]
-git = 'https://github.com/aptos-labs/aptos-core.git'
-rev = 'main'
-subdir = 'aptos-move/framework/aptos-framework'
+[addresses]
+escrow-contract = "_"
+Std = "0x1"
+aptos_std = "0x1"
 
-[addreses]
-escrow__addr = "0xa1e3aa355555eb0b94cb3de6c98c1a5dd33c45a3647b3b5697c21d4719339b2e"
+[dependencies]
+AptosFramework = { local = "C:/Users/acer/Downloads/aptos-NFT/aptos-core/aptos-move/framework/aptos-framework"}
